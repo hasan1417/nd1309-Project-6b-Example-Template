@@ -1,18 +1,20 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.8.10;
 
 // Import the library 'Roles'
 import "./Roles.sol";
 
 // Define a contract 'ConsumerRole' to manage this role - add, remove, check
 contract ConsumerRole {
-
+  using Roles for Roles.Role;
   // Define 2 events, one for Adding, and other for Removing
+  event Added(address indexed consumer);
+  event Removed(address indexed consumer);
 
   // Define a struct 'consumers' by inheriting from 'Roles' library, struct Role
-
+  Roles.Role private consumers;
   // In the constructor make the address that deploys this contract the 1st consumer
   constructor() public {
-    
+    consumers consumer = consumers(msg.sender);
   }
 
   // Define a modifier that checks to see if msg.sender has the appropriate role
